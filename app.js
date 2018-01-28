@@ -124,12 +124,12 @@ var Room = {
   },
 
   addPlayer : function(player){
-    var id = player.getId();
-    this.playerList[id] = player;
+    var playerId = player.getId();
+    this.playerList[playerId] = player;
   },
 
   removePlayer : function(player){
-    var playerId = player.id;
+    var playerId = player.getId();
     delete this.playerList[playerId];
   }
 }
