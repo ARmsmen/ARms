@@ -161,7 +161,6 @@ var Vec3 = function(){
 var socketList = {};
 var playerList = {}; //player list of Player-type variables
 
-
 io.sockets.on('connection', function(socket){
 	
 	socket.id = ID.socketID.get();
@@ -191,8 +190,8 @@ io.sockets.on('connection', function(socket){
 	socket.on('disconnect', function(data){ disconnect(socket, data);});
 	
 	function sendToAll(infoType, data){
-	for (var i in SOCKET_LIST){
-		SOCKET_LIST[i].emit(infoType , data);
+	for (var i in socketList){
+		socketList[i].emit(infoType , data);
 	}
 	}
 	
@@ -201,9 +200,9 @@ io.sockets.on('connection', function(socket){
 		var id = socket.id;
 		var data = data || {};
 		var type = data.type || 'has disconnected';
-		var name = PLAYER_LIST[socket.id].name;
-		delete SOCKET_LIST[socket.id];
-		delete PLAYER_LIST[socket.id];
+		var name = playerList[socket.id].name;
+		delete socketList[socket.id];
+		delete playerList[socket.id];
 		
 		sendToAll('deleteinfo', {id : id});
 	}
