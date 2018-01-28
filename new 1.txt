@@ -1,0 +1,25 @@
+// Function List 1 
+room.addPlayer // make a player list or something
+room.getInfo()
+player.getInfo()
+roomList.addRoom 
+room.getPlayer()
+player.setData()
+
+
+Vanika / Elisa
+roomList
+roomList.addRoom(room);
+room.getInfo(); // return playerList
+room.getPlayer(playerID);
+
+Simon/Shardul
+playerList
+player.getInfo()
+player.setData()
+decide on ons/emits
+shooting
+
+disconnect()
+
+
