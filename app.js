@@ -196,16 +196,21 @@ io.sockets.on('connection', function(socket){
 	}
 	
 	function disconnect(socket, data){
-		// pass room id in data 
 		var id = socket.id;
 		var data = data || {};
 		var type = data.type || 'has disconnected';
+
 		var name = playerList[socket.id].name;
 		delete socketList[socket.id];
-		delete playerList[socket.id];
-		
+   		var player = playerList[socket.id];
+    		roomList.getRoom(player.getRoomID()).removePlayer(player);
+		delete player;
 		sendToAll('deleteinfo', {id : id});
+		sendToAll('addToChat', {words : '<i> '+(name || id)+' '+ type +'</i>'});
+
+		console.log(id, 'disconnected');
 	}
+
 	
 	
 });
