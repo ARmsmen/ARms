@@ -1,3 +1,4 @@
+var serverFPS = 40;
 var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
@@ -72,6 +73,7 @@ var Room = {
     }
   },
 
+  
   addPlayer : function(player){
     var playerId = player.getId();
     this.playerList[playerId] = player;
@@ -99,6 +101,41 @@ var Vec3 = function(){
 	return {x:0, y:0, z:0}	
 }
 
+var Player = {
+	
+	
+	make : function()
+	{ 
+		var self = {
+			direction : Vec3(),
+			id: ID.playerID.get(),
+			getInfo : Player.getInfo
+		}
+		return self;
+	},
+
+	getInfo: function()
+	{
+		return {
+			id: this.id,
+			direction: this.direction
+		}
+	
+	},
+
+	setInfo: function(data)
+	{
+		this.direction = data.direction 
+		//right now, all we need is the direction from the data being received from the clients
+	}
+
+}
+
+function update(){
+	for (var i in SOCKET_LIST){
+		SOCKET_LIST[i].emit('serverInfo', PLAYER_LIST);
+	}
+}
 
 
 var socketList = {};
@@ -146,7 +183,7 @@ io.sockets.on('connection', function(socket){
 		var name = playerList[socket.id].name;
 		delete socketList[socket.id];
    		var player = playerList[socket.id];
-    		roomList.getRoom(player.getRoomID()).removePlayer(player);
+    	roomList.getRoom(player.getRoomID()).removePlayer(player);
 		delete player;
 		sendToAll('deleteinfo', {id : id});
 		sendToAll('addToChat', {words : '<i> '+(name || id)+' '+ type +'</i>'});
@@ -161,40 +198,4 @@ io.sockets.on('connection', function(socket){
 	/////////////////////////////////////////////////////////////////////////////
 	
 
-	var Player = {
-		
-		
-		make : function()
-		{ 
-			var self = {
-				direction : Vec3(),
-				id: ID.playerID.get(),
-				getInfo : Player.getInfo
-			}
-			return self;
-		},
-	
-		getInfo: function()
-		{
-			return {
-				id: this.id,
-				direction: this.direction
-			}
-		
-		},
-	
-		setInfo: function(data)
-		{
-			this.direction = data.direction 
-			//right now, all we need is the direction from the data being received from the clients
-		}
-	
-	}
-
-
-	
-	
-	
-	}
-}
 	
