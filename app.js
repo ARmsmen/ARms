@@ -5,7 +5,7 @@ var serv = require('http').Server(app);
 
 app.get('/', function(req, res){
 	// req = request, res = result
-	res.sendFile(__dirname + 'index.html');
+	res.sendFile(__dirname + '/index.html');
 });
 
 app.use('/Client', express.static(__dirname + '/Client/'));

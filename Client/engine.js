@@ -171,7 +171,7 @@
 	// }	
 	var character;
 		loader = new THREE.JSONLoader();
-		loader.load('./MODEL/ai5.json', function(geometry, materials){
+		loader.load('./Client/MODEL/ai5.json', function(geometry, materials){
 			materials.forEach(function(mat) {
 					mat.skinning = true;
 			});
