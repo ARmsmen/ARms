@@ -7,6 +7,8 @@ html changes
 <script src="../build/ar.js"></script>
 <script src="gamecontroller.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = './'</script>
+<script src="sadman.js"></script>
+
 
 
 -- in body
