@@ -1527,7 +1527,7 @@ var Qb=[Ik,Zh,_h,Qj,Qi,Pi,Ri,Ag,sg,qg,rg,yg,kh,jh,Oi,Mj];var Rb=[Jk,ki,ji,gi];va
 				// console.assert(file !== '')
 				if( file === 'patt.hiro' || file === 'patt.kanji' || file === 'patt2.hiro' || file === 'patt2.kanji' ){
 					// debugger
-					return ['http://127.0.0.1:8080/Client/' + file, file]
+					return ['http://127.0.0.1:8080/data/data/' + file, file]
 				}
 				return [path + '/' + file, file]
 			})
@@ -5150,7 +5150,7 @@ ARjs.Context = THREEx.ArToolkitContext = function(parameters){
 		matrixCodeType: '3x3',
 		
 		// url of the camera parameters
-		cameraParametersUrl: ARjs.Context.baseURL + 'camera_para.dat',
+		cameraParametersUrl: ARjs.Context.baseURL + 'parameters/camera_para.dat',
 
 		// tune the maximum rate of pose detection in the source image
 		maxDetectionRate: 60,
@@ -5605,12 +5605,12 @@ ARjs.Profile.prototype.reset = function () {
 	}
 
 	this.contextParameters = {
-		cameraParametersUrl: THREEx.ArToolkitContext.baseURL + 'camera_para.dat',
+		cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
 		detectionMode: 'mono',
 	}
 	this.defaultMarkerParameters = {
 		type : 'pattern',
-		patternUrl : THREEx.ArToolkitContext.baseURL + 'patt.hiro',
+		patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
 		changeMatrixMode: 'modelViewMatrix',
 	}
 	return this
@@ -5665,7 +5665,7 @@ ARjs.Profile.prototype.defaultMarker = function (trackingBackend) {
 	if( trackingBackend === 'artoolkit' ){
 		this.contextParameters.detectionMode = 'mono'
 		this.defaultMarkerParameters.type = 'pattern'
-		this.defaultMarkerParameters.patternUrl = THREEx.ArToolkitContext.baseURL + 'patt.hiro'
+		this.defaultMarkerParameters.patternUrl = THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro'
 	}else if( trackingBackend === 'aruco' ){
 		this.contextParameters.detectionMode = 'mono'
 		this.defaultMarkerParameters.type = 'barcode'
@@ -5731,7 +5731,7 @@ ARjs.Profile.prototype.trackingMethod = function (trackingMethod) {
  */
 ARjs.Profile.prototype.checkIfValid = function () {
 	if( this.contextParameters.trackingBackend === 'tango' ){
-		this.sourceImage(THREEx.ArToolkitContext.baseURL + 'img.jpg')
+		this.sourceImage(THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg')
 	}
 	return this
 }
