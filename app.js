@@ -130,10 +130,11 @@ var Player = {
 	}
 
 }
+setInterval( update, 1000/serverFPS);
 
 function update(){
-	for (var i in SOCKET_LIST){
-		SOCKET_LIST[i].emit('serverInfo', PLAYER_LIST);
+	for (var i in socketList){
+		socketList[i].emit('serverInfo', PLAYER_LIST);
 	}
 }
 
